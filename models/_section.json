@@ -39,22 +39,29 @@
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "section",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title",
-        "hero",
-        "cards",
-        "columns",
-        "fragment",
-        "announcement",
-        "grid"
-      ]
-    }
-  ]
+"filters": [
+  {
+    "id": "restricted-filter",
+    "components": [
+      "hero",
+      "cards"
+    ]
+  },
+  {
+    "id": "open-filter",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title",
+      "hero",
+      "cards",
+      "columns",
+      "fragment",
+      "announcement",
+      "grid"
+    ]
+  }
+]
 }
 
