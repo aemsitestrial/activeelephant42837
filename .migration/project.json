@@ -1,0 +1,15 @@
+{
+  "sites": {
+    "activeelephant42837": {
+      "previewOrg": "aemsitestrial",
+      "previewSite": "activeelephant42837",
+      "contentHostUrl": "author-p153710-e1614654.adobeaemcloud.com",
+      "aemSitePath": "/content/2026/36/activeelephant42837",
+      "aemAssetsFolderPath": "/content/dam/2026/36/activeelephant42837",
+      "aemSiteName": "activeelephant42837",
+      "aemSiteTitle": "activeelephant42837",
+      "libraryUrl": "https://github.com/aemsitestrial/activeelephant42837",
+      "baseUrl": "https://main--activeelephant42837--aemsitestrial.aem.live"
+    }
+  }
+}

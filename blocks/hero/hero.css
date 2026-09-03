@@ -5,22 +5,46 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 64px 24px;
+  min-height: 360px;
+  overflow: hidden;
 }
 
-.hero h1 {
+/* Content sits above the image and a readability scrim */
+.hero > div,
+.hero h1,
+.hero p {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero h1 {
   color: var(--background-color);
+  margin-bottom: 8px;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 45%);
+}
+
+.hero p {
+  color: var(--background-color);
+  font-size: var(--body-font-size-m);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 45%);
 }
 
 .hero picture {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
-  object-fit: cover;
   box-sizing: border-box;
 }
 
@@ -30,8 +54,23 @@
   height: 100%;
 }
 
+/* Dark gradient scrim over the image so light photos stay readable */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 55%) 0%,
+    rgb(0 0 0 / 35%) 45%,
+    rgb(0 0 0 / 20%) 100%
+  );
+}
+
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: 80px 32px;
+    min-height: 440px;
   }
 }
