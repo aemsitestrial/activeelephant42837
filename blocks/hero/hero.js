@@ -37,8 +37,17 @@ export default function decorate(block) {
     const picture = document.createElement('picture');
     picture.append(img);
 
-    // Replace the anchor (and unwrap it from any wrapping <p>).
-    const wrapper = anchor.closest('p') || anchor;
-    wrapper.replaceWith(picture);
+    // Remove the anchor (and its wrapping cell), then append the picture as a
+    // DIRECT child of the hero block. The hero CSS positions `.hero picture`
+    // absolutely against the hero box (which has min-height); leaving it inside
+    // the original 0-height content cell would collapse the image to height 0.
+    const cell = anchor.closest(':scope > div, p') || anchor;
+    const topCell = anchor.closest(':scope > div');
+    if (topCell && topCell.parentElement === block) {
+      topCell.remove();
+    } else {
+      cell.remove();
+    }
+    block.prepend(picture);
   });
 }
