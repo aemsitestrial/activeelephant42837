@@ -1,20 +1,34 @@
 {
-  "definitions": [
-    {
-      "title": "Section",
-      "id": "section",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/section/v1/section",
-            "template": {
-              "model": "section"
-            }
+"definitions": [
+  {
+    "title": "Restricted Section",
+    "id": "restricted-section",
+    "plugins": {
+      "xwalk": {
+        "page": {
+          "resourceType": "core/franklin/components/section/v1/section",
+          "template": {
+            "model": "section"
           }
         }
       }
     }
-  ],
+  },
+  {
+    "title": "Open Section",
+    "id": "open-section",
+    "plugins": {
+      "xwalk": {
+        "page": {
+          "resourceType": "core/franklin/components/section/v1/section",
+          "template": {
+            "model": "section"
+          }
+        }
+      }
+    }
+  }
+],
   "models": [
     {
       "id": "section",
