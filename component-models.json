@@ -230,7 +230,7 @@
     "id": "hero",
     "fields": [
       {
-        "component": "reference",
+        "component": "image",
         "valueType": "string",
         "name": "image",
         "label": "Image",
