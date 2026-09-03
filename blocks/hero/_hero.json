@@ -21,10 +21,11 @@
       "id": "hero",
       "fields": [
         {
-          "component": "image",
+          "component": "reference",
           "valueType": "string",
           "name": "image",
           "label": "Image",
+          "type": "image",
           "multi": false
         },
         {
