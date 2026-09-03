@@ -50,7 +50,11 @@ export default {
         section.querySelectorAll(':scope > .card').forEach((card) => {
           const img = card.querySelector('img');
           const text = [...card.querySelectorAll('h3, p')];
-          rows.push([img, text]);
+          // The `card` model has two fields (image, text) → two columns. Every row
+          // must supply both cells so md2jcr can map each field to its column;
+          // when a card has no image, emit an empty first cell (not a missing one).
+          const imageCell = img || '';
+          rows.push([imageCell, text]);
         });
         const table = WebImporter.DOMUtils.createTable(rows, document);
         out.append(table);

@@ -59,7 +59,8 @@ var CustomImportScript = (() => {
           section.querySelectorAll(":scope > .card").forEach((card) => {
             const img = card.querySelector("img");
             const text = [...card.querySelectorAll("h3, p")];
-            rows.push([img, text]);
+            const imageCell = img || "";
+            rows.push([imageCell, text]);
           });
           const table = WebImporter.DOMUtils.createTable(rows, document);
           out.append(table);
