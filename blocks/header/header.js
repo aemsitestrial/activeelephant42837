@@ -7,18 +7,7 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
-    const navTools = nav.querySelector('.nav-tools');
-  if (navTools) {
-    navTools.textContent = '';
-    const searchLink = document.createElement('a');
-    searchLink.className = 'nav-search';
-    searchLink.href = '/search';
-    searchLink.setAttribute('aria-label', 'Search');
-    searchLink.innerHTML = '<span class="nav-search-icon" aria-hidden="true"></span><span class="nav-search-label">SEARCH</span>';
-    navTools.append(searchLink);
-  }
-
-  const navSections = nav.querySelector('.nav-sections');
+    const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
@@ -86,6 +75,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -137,10 +127,22 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
+  }
+
+  // decorate search tool
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.textContent = '';
+    const searchLink = document.createElement('a');
+    searchLink.className = 'nav-search';
+    searchLink.href = '/search';
+    searchLink.setAttribute('aria-label', 'Search');
+    searchLink.innerHTML = '<span class="nav-search-icon" aria-hidden="true"></span><span class="nav-search-label">SEARCH</span>';
+    navTools.append(searchLink);
   }
 
   const navSections = nav.querySelector('.nav-sections');
@@ -166,6 +168,7 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
+
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
