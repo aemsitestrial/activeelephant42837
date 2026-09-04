@@ -9,20 +9,34 @@ function looksLikeImageUrl(url) {
   return IMAGE_URL_RE.test(url) || AEM_ASSETS_DELIVERY_RE.test(url);
 }
 
+// External (cross-origin) URLs must NOT be run through createOptimizedPicture:
+// it rebuilds a same-origin relative path and drops the host, breaking the src.
+function isExternalUrl(url) {
+  try {
+    return new URL(url, window.location.href).origin !== window.location.origin;
+  } catch (e) {
+    return false;
+  }
+}
+
 /**
- * External AEM Assets delivery URLs arrive as a bare <a> link rather than a
- * <picture>. Convert any such link inside the row into a real <picture><img> so
- * the grid tile shows the image instead of a URL.
+ * External AEM Assets delivery URLs arrive as a bare <a> link (sometimes styled
+ * as a button in a p.button-container) rather than a <picture>. Convert any link
+ * whose href is an image URL into a real <picture><img>, using the link's text /
+ * title as alt. Keyed on the HREF only — the visible label is often descriptive
+ * alt text, so it must not gate the conversion.
  */
 function normalizeImageLinks(row) {
   row.querySelectorAll('a[href]').forEach((anchor) => {
     const href = anchor.getAttribute('href');
-    const label = anchor.textContent.trim();
     if (!looksLikeImageUrl(href)) return;
-    if (label && label !== href && !looksLikeImageUrl(label)) return;
 
+    const label = anchor.textContent.trim();
     const title = anchor.getAttribute('title') || '';
-    const alt = (title && title !== href && !looksLikeImageUrl(title)) ? title : '';
+    // Prefer a descriptive alt (title or label), but never the URL itself.
+    let alt = '';
+    if (title && title !== href && !looksLikeImageUrl(title)) alt = title;
+    else if (label && label !== href && !looksLikeImageUrl(label)) alt = label;
 
     const img = document.createElement('img');
     img.src = href;
@@ -31,6 +45,7 @@ function normalizeImageLinks(row) {
     const picture = document.createElement('picture');
     picture.append(img);
 
+    // Replace the anchor and unwrap any button/paragraph wrapper around it.
     const wrapper = anchor.closest('p') || anchor;
     wrapper.replaceWith(picture);
   });
@@ -52,7 +67,7 @@ export default function decorate(block) {
       figure.className = 'grid-item-image';
       figure.append(picture);
 
-      // Any remaining text becomes the caption (last cell, if it has content).
+      // Any remaining text becomes the caption (first non-image cell with content).
       const captionCell = cells.find((cell) => !cell.querySelector('picture') && cell.textContent.trim());
       if (captionCell) {
         const figcaption = document.createElement('figcaption');
@@ -69,8 +84,13 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  // Optimize images for the gallery.
+  // Optimize only same-origin images; leave external delivery URLs untouched so
+  // their absolute src is preserved (optimizing would strip the host → 404).
   ul.querySelectorAll('picture > img').forEach((img) => {
+    if (isExternalUrl(img.src)) {
+      img.loading = 'lazy';
+      return;
+    }
     const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
     moveInstrumentation(img, optimizedPic.querySelector('img'));
     img.closest('picture').replaceWith(optimizedPic);
