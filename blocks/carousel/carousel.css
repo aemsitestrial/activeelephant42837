@@ -10,7 +10,7 @@
 
 .carousel-slides {
   position: relative;
-  min-height: 420px;
+  min-height: 460px;
 }
 
 /* Every slide fills the fixed-height track (absolute), so a slide with an image
@@ -22,7 +22,7 @@
   visibility: hidden;
   transition: opacity 0.6s ease;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .carousel-slide.active {
@@ -43,87 +43,67 @@
   object-fit: cover;
 }
 
-/* Readability scrim over the image */
-.carousel-slide-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 30%) 50%, rgb(0 0 0 / 10%) 100%);
-}
-
+/* WKND-style: white content card anchored bottom-left, dark text, yellow CTA */
 .carousel-slide-content {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  box-sizing: border-box;
   width: 100%;
-  margin: 0 auto;
-  padding: 48px 24px;
-  color: var(--background-color);
+  max-width: 620px;
+  margin: 0;
+  padding: 40px;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 .carousel-slide-content h1,
 .carousel-slide-content h2,
 .carousel-slide-content h3 {
-  color: var(--background-color);
-  max-width: 640px;
   margin: 0 0 16px;
-  text-shadow: 0 2px 12px rgb(0 0 0 / 45%);
+  color: var(--text-color);
+  line-height: 1.1;
 }
 
 .carousel-slide-content p {
-  max-width: 560px;
-  font-size: var(--body-font-size-m);
-  text-shadow: 0 1px 8px rgb(0 0 0 / 45%);
+  margin: 0 0 20px;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: var(--text-color);
 }
 
-/* Navigation */
+.carousel-slide-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Square (non-pill) yellow button, WKND style */
+.carousel-slide-content .button-container {
+  margin: 0;
+}
+
+.carousel-slide-content a.button {
+  margin: 0;
+  border-radius: 0;
+  padding: 0.8em 1.6em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Dots: bottom-center */
 .carousel-nav {
   position: absolute;
-  inset: auto 0 20px;
+  inset: auto 0 24px;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-}
-
-.carousel-arrow {
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 85%);
-  cursor: pointer;
-  position: relative;
-  padding: 0;
-}
-
-.carousel-arrow:hover {
-  background: var(--background-color);
-}
-
-.carousel-arrow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid var(--text-color);
-  border-bottom: 2px solid var(--text-color);
-}
-
-.carousel-prev::before {
-  transform: translate(-30%, -50%) rotate(135deg);
-}
-
-.carousel-next::before {
-  transform: translate(-70%, -50%) rotate(-45deg);
+  pointer-events: none;
 }
 
 .carousel-dots {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  pointer-events: auto;
 }
 
 .carousel-dot {
@@ -134,18 +114,70 @@
   background: transparent;
   cursor: pointer;
   padding: 0;
+  box-shadow: 0 0 3px rgb(0 0 0 / 40%);
 }
 
 .carousel-dot.active {
   background: var(--background-color);
 }
 
+/* Arrows: bottom-right, plain (no circle) */
+.carousel-arrow {
+  position: absolute;
+  bottom: 16px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  pointer-events: auto;
+  z-index: 3;
+}
+
+.carousel-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--background-color);
+  border-bottom: 2px solid var(--background-color);
+  filter: drop-shadow(0 0 2px rgb(0 0 0 / 50%));
+}
+
+.carousel-prev {
+  right: 64px;
+}
+
+.carousel-next {
+  right: 16px;
+}
+
+.carousel-prev::before {
+  transform: translate(-30%, -50%) rotate(135deg);
+}
+
+.carousel-next::before {
+  transform: translate(-70%, -50%) rotate(-45deg);
+}
+
 @media (width >= 900px) {
   .carousel-slides {
-    min-height: 560px;
+    min-height: 620px;
   }
 
   .carousel-slide-content {
-    padding: 64px 32px;
+    margin: 0 0 64px 64px;
+    padding: 48px;
+  }
+
+  .carousel-nav {
+    inset: auto 0 40px;
+  }
+
+  .carousel-arrow {
+    bottom: 32px;
   }
 }
