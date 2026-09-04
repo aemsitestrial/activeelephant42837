@@ -7,7 +7,18 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
+    const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.textContent = '';
+    const searchLink = document.createElement('a');
+    searchLink.className = 'nav-search';
+    searchLink.href = '/search';
+    searchLink.setAttribute('aria-label', 'Search');
+    searchLink.innerHTML = '<span class="nav-search-icon" aria-hidden="true"></span><span class="nav-search-label">SEARCH</span>';
+    navTools.append(searchLink);
+  }
+
+  const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
