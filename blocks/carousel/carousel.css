@@ -13,6 +13,8 @@
   min-height: 420px;
 }
 
+/* Every slide fills the fixed-height track (absolute), so a slide with an image
+   but no text still shows at full height instead of collapsing to 0. */
 .carousel-slide {
   position: absolute;
   inset: 0;
@@ -26,7 +28,7 @@
 .carousel-slide.active {
   opacity: 1;
   visibility: visible;
-  position: relative;
+  z-index: 1;
 }
 
 .carousel-slide-image {
