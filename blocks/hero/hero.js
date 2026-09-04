@@ -19,15 +19,17 @@ function looksLikeImageUrl(url) {
 export default function decorate(block) {
   block.querySelectorAll('a[href]').forEach((anchor) => {
     const href = anchor.getAttribute('href');
-    // Only convert when the link points to an image and isn't a real text link
-    // (i.e. its label is empty or is just the URL itself).
-    const label = anchor.textContent.trim();
+    // Convert based on the HREF only. The visible label is often descriptive alt
+    // text (e.g. a button-styled link "Waiter in black apron..."), so it must NOT
+    // gate the conversion — otherwise the link stays a link and the hero is blank.
     if (!looksLikeImageUrl(href)) return;
-    if (label && label !== href && !looksLikeImageUrl(label)) return;
 
-    // EDS autolinking sets title === href; treat that as "no real alt".
+    // Prefer a descriptive alt (title or label), but never the URL itself.
+    const label = anchor.textContent.trim();
     const title = anchor.getAttribute('title') || '';
-    const alt = (title && title !== href && !looksLikeImageUrl(title)) ? title : '';
+    let alt = '';
+    if (title && title !== href && !looksLikeImageUrl(title)) alt = title;
+    else if (label && label !== href && !looksLikeImageUrl(label)) alt = label;
 
     const img = document.createElement('img');
     img.src = href;
