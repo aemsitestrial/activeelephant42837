@@ -19,6 +19,11 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
+  /* accent (WKND-style gold) */
+  --accent-color: #ffc000;
+  --accent-hover-color: #e6ad00;
+  --accent-text-color: #131313;
+
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -181,8 +186,8 @@ button {
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -193,7 +198,7 @@ a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--accent-hover-color);
   cursor: pointer;
 }
 
