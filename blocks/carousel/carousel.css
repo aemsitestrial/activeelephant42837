@@ -6,34 +6,35 @@
 .carousel {
   position: relative;
   overflow: hidden;
+  background: var(--background-color);
 }
 
 .carousel-slides {
   position: relative;
-  min-height: 460px;
+  min-height: 620px;
 }
 
-/* Every slide fills the fixed-height track (absolute), so a slide with an image
-   but no text still shows at full height instead of collapsing to 0. */
 .carousel-slide {
   position: absolute;
   inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 24px 64px;
+  box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease;
-  display: flex;
-  align-items: flex-end;
 }
 
 .carousel-slide.active {
+  z-index: 1;
   opacity: 1;
   visibility: visible;
-  z-index: 1;
 }
 
 .carousel-slide-image {
   position: absolute;
-  inset: 0;
+  inset: 0 0 64px;
   z-index: 0;
 }
 
@@ -43,15 +44,12 @@
   object-fit: cover;
 }
 
-/* WKND-style: white content card anchored bottom-left, dark text, yellow CTA */
 .carousel-slide-content {
   position: relative;
   z-index: 1;
   box-sizing: border-box;
   width: 100%;
-  max-width: 1100px;
-  margin: 0;
-  padding: 40px;
+  padding: 32px 40px;
   background: var(--background-color);
   color: var(--text-color);
 }
@@ -61,123 +59,147 @@
 .carousel-slide-content h3 {
   margin: 0 0 16px;
   color: var(--text-color);
-  line-height: 1.1;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.15;
 }
 
 .carousel-slide-content p {
   margin: 0 0 20px;
-  font-size: var(--body-font-size-s);
-  line-height: 1.5;
   color: var(--text-color);
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .carousel-slide-content p:last-child {
   margin-bottom: 0;
 }
 
-/* Square (non-pill) yellow button, WKND style */
 .carousel-slide-content .button-container {
-  margin: 0;
+  margin: 28px 0 0;
 }
 
 .carousel-slide-content a.button {
   margin: 0;
   border-radius: 0;
-  padding: 0.8em 1.6em;
+  padding: 18px 50px;
+  background: #ffe600;
+  color: #000;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
-/* Dots: bottom-center */
+/* White control strip below the image/card */
 .carousel-nav {
   position: absolute;
-  inset: auto 0 24px;
-  z-index: 2;
+  inset: auto 0 0;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 64px;
+  background: var(--background-color);
   pointer-events: none;
 }
 
 .carousel-dots {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   pointer-events: auto;
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--background-color);
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 0;
   border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
   padding: 0;
-  box-shadow: 0 0 3px rgb(0 0 0 / 40%);
+  background: #b7b7b7;
+  box-shadow: none;
+  cursor: pointer;
 }
 
 .carousel-dot.active {
-  background: var(--background-color);
+  background: #2d2d2d;
 }
 
-/* Arrows: bottom-right, plain (no circle) */
 .carousel-arrow {
   position: absolute;
-  bottom: 16px;
-  width: 40px;
-  height: 40px;
+  top: 50%;
+  width: 48px;
+  height: 48px;
   border: 0;
+  padding: 0;
   background: transparent;
   cursor: pointer;
-  padding: 0;
   pointer-events: auto;
-  z-index: 3;
+  transform: translateY(-50%);
 }
 
-.carousel-arrow::before {
+.carousel-arrow::before,
+.carousel-arrow::after {
   content: '';
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid var(--background-color);
-  border-bottom: 2px solid var(--background-color);
-  filter: drop-shadow(0 0 2px rgb(0 0 0 / 50%));
+  background: #000;
+}
+
+.carousel-arrow::before {
+  width: 28px;
+  height: 2px;
+}
+
+.carousel-arrow::after {
+  width: 14px;
+  height: 14px;
+  border-bottom: 3px solid #000;
+  border-left: 3px solid #000;
+  background: transparent;
 }
 
 .carousel-prev {
-  right: 64px;
+  right: 72px;
 }
 
 .carousel-next {
   right: 16px;
 }
 
-.carousel-prev::before {
-  transform: translate(-30%, -50%) rotate(135deg);
+.carousel-prev::before,
+.carousel-next::before {
+  left: 10px;
+  transform: translateY(-50%);
 }
 
-.carousel-next::before {
-  transform: translate(-70%, -50%) rotate(-45deg);
+.carousel-prev::after {
+  left: 10px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.carousel-next::after {
+  right: 10px;
+  transform: translateY(-50%) rotate(225deg);
 }
 
 @media (width >= 900px) {
   .carousel-slides {
-    min-height: 620px;
+    min-height: 830px;
+  }
+
+  .carousel-slide {
+    padding: 0 45px 64px;
+  }
+
+  .carousel-slide-image {
+    inset: 0 0 64px;
   }
 
   .carousel-slide-content {
-    margin: 0 0 64px 64px;
-    padding: 48px;
-  }
-
-  .carousel-nav {
-    inset: auto 0 40px;
-  }
-
-  .carousel-arrow {
-    bottom: 32px;
+    padding: 38px 42px 42px;
   }
 }
