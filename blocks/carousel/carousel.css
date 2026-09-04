@@ -3,16 +3,14 @@
   padding: 0;
 }
 
-/* extra bottom room so the overlapping card can hang below the image edge */
 .carousel {
   position: relative;
-  padding-bottom: 56px;
+  overflow: hidden;
 }
 
 .carousel-slides {
   position: relative;
   min-height: 460px;
-  overflow: hidden;
 }
 
 /* Every slide fills the fixed-height track (absolute), so a slide with an image
@@ -45,20 +43,17 @@
   object-fit: cover;
 }
 
-/* Floating editorial content card: light neutral, left-aligned, overlaps the
-   lower edge of the image (translateY) with a soft shadow for a layered look. */
+/* WKND-style: white content card anchored bottom-left, dark text, yellow CTA */
 .carousel-slide-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   box-sizing: border-box;
   width: 100%;
-  max-width: 640px;
-  margin: 0 24px;
-  padding: 36px;
-  background: var(--light-color);
+  max-width: 620px;
+  margin: 0;
+  padding: 40px;
+  background: var(--background-color);
   color: var(--text-color);
-  box-shadow: 0 24px 48px rgb(0 0 0 / 22%);
-  transform: translateY(56px);
 }
 
 .carousel-slide-content h1,
@@ -73,14 +68,14 @@
   margin: 0 0 20px;
   font-size: var(--body-font-size-s);
   line-height: 1.5;
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .carousel-slide-content p:last-child {
   margin-bottom: 0;
 }
 
-/* Square, uppercase primary CTA */
+/* Square (non-pill) yellow button, WKND style */
 .carousel-slide-content .button-container {
   margin: 0;
 }
@@ -94,11 +89,11 @@
   text-transform: uppercase;
 }
 
-/* Indicators: subtle dots, centered along the bottom of the image */
+/* Dots: bottom-center */
 .carousel-nav {
   position: absolute;
-  inset: auto 0 72px;
-  z-index: 3;
+  inset: auto 0 24px;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,31 +107,31 @@
 }
 
 .carousel-dot {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border: 2px solid var(--background-color);
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
   padding: 0;
-  box-shadow: 0 0 3px rgb(0 0 0 / 45%);
-  transition: background-color 0.2s ease;
+  box-shadow: 0 0 3px rgb(0 0 0 / 40%);
 }
 
 .carousel-dot.active {
   background: var(--background-color);
 }
 
-/* Prev/next arrows: lower-right corner, plain chevrons */
+/* Arrows: bottom-right, plain (no circle) */
 .carousel-arrow {
   position: absolute;
-  bottom: 68px;
+  bottom: 16px;
   width: 40px;
   height: 40px;
   border: 0;
   background: transparent;
   cursor: pointer;
   padding: 0;
+  pointer-events: auto;
   z-index: 3;
 }
 
@@ -145,19 +140,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-right: 2px solid var(--background-color);
   border-bottom: 2px solid var(--background-color);
-  filter: drop-shadow(0 0 2px rgb(0 0 0 / 55%));
+  filter: drop-shadow(0 0 2px rgb(0 0 0 / 50%));
 }
 
 .carousel-prev {
-  right: 68px;
+  right: 64px;
 }
 
 .carousel-next {
-  right: 20px;
+  right: 16px;
 }
 
 .carousel-prev::before {
@@ -169,25 +164,20 @@
 }
 
 @media (width >= 900px) {
-  .carousel {
-    padding-bottom: 64px;
-  }
-
   .carousel-slides {
-    min-height: 640px;
+    min-height: 620px;
   }
 
   .carousel-slide-content {
-    margin: 0 0 0 64px;
+    margin: 0 0 64px 64px;
     padding: 48px;
-    transform: translateY(64px);
   }
 
   .carousel-nav {
-    inset: auto 0 88px;
+    inset: auto 0 40px;
   }
 
   .carousel-arrow {
-    bottom: 84px;
+    bottom: 32px;
   }
 }
