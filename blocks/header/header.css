@@ -4,6 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
+  border: 0;
 }
 
 header nav {
@@ -274,11 +275,6 @@ header nav .nav-tools {
 }
 
 /* Compact WKND header */
-header .nav-wrapper {
-  background-color: #fff;
-  border: 0;
-}
-
 @media (width >= 900px) {
   header nav {
     box-sizing: border-box;
