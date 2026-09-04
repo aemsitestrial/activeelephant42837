@@ -131,8 +131,8 @@
 .carousel-arrow {
   position: absolute;
   top: 50%;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   border: 0;
   padding: 0;
   background: transparent;
@@ -150,15 +150,15 @@
 }
 
 .carousel-arrow::before {
-  width: 28px;
+  width: 18px;
   height: 2px;
 }
 
 .carousel-arrow::after {
-  width: 14px;
-  height: 14px;
-  border-bottom: 3px solid #000;
-  border-left: 3px solid #000;
+  width: 9px;
+  height: 9px;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #000;
   background: transparent;
 }
 
@@ -172,17 +172,17 @@
 
 .carousel-prev::before,
 .carousel-next::before {
-  left: 10px;
+  left: 7px;
   transform: translateY(-50%);
 }
 
 .carousel-prev::after {
-  left: 10px;
+  left: 7px;
   transform: translateY(-50%) rotate(45deg);
 }
 
 .carousel-next::after {
-  right: 10px;
+  right: 7px;
   transform: translateY(-50%) rotate(225deg);
 }
 
