@@ -186,6 +186,11 @@ header nav .nav-sections ul > li > ul > li {
     display: block;
     visibility: visible;
     white-space: nowrap;
+
+    /* push the menu links to the right, keeping the logo on the left.
+       flex:0 (not the base flex:1) leaves free space for margin-left:auto. */
+    flex: 0 1 auto;
+    margin-left: auto;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
