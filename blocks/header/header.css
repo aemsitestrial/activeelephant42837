@@ -346,36 +346,47 @@ header nav .nav-tools {
   header nav .nav-tools .nav-search {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    color: #000;
-    background: transparent;
+    gap: 12px;
+    box-sizing: border-box;
+    min-width: 220px;
+    height: 44px;
+    padding: 0 20px;
+    color: #767676;
+    background: #f2f2f2;
     text-decoration: none;
   }
 
+  header nav .nav-tools .nav-search:hover {
+    background: #ececec;
+  }
+
   header nav .nav-tools .nav-search-label {
-    display: none;
+    display: inline;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #767676;
   }
 
   header nav .nav-tools .nav-search-icon {
     position: relative;
     box-sizing: border-box;
-    width: 17px;
-    height: 17px;
-    border: 2.5px solid #000;
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #333;
     border-radius: 50%;
   }
 
   header nav .nav-tools .nav-search-icon::after {
     content: '';
     position: absolute;
-    right: -7px;
-    bottom: -4px;
-    width: 8px;
-    height: 2.5px;
-    background: #000;
+    right: -6px;
+    bottom: -3px;
+    width: 7px;
+    height: 2px;
+    background: #333;
     transform: rotate(45deg);
     transform-origin: left center;
   }
