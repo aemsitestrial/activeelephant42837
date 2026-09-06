@@ -29,6 +29,24 @@
   margin: 0 0 16px;
 }
 
+/* WKND square-yellow button (matches the carousel CTA) */
+.teaser-content a.button {
+  margin: 8px 0 0;
+  border-radius: 0;
+  padding: 18px 50px;
+  background: #ffe600;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.teaser-content a.button:hover,
+.teaser-content a.button:focus {
+  background: #e6cf00;
+}
+
 /* Side-by-side on wider screens (image left, copy right) */
 @media (width >= 900px) {
   .teaser {
