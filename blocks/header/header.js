@@ -185,8 +185,10 @@ export default async function decorate(block) {
   const SHRINK_AFTER = 80; // px scrolled before shrinking kicks in
   const updateHeaderState = () => {
     const currentY = window.scrollY;
-    if (nav.getAttribute('aria-expanded') === 'true') {
-      // never shrink while the mobile menu is open
+    // The desktop menu keeps aria-expanded="true" permanently, so only treat it
+    // as "menu open" (and skip shrinking) on mobile widths.
+    const mobileMenuOpen = !isDesktop.matches && nav.getAttribute('aria-expanded') === 'true';
+    if (mobileMenuOpen) {
       navWrapper.classList.remove('nav-shrink');
     } else if (currentY > lastScrollY && currentY > SHRINK_AFTER) {
       navWrapper.classList.add('nav-shrink'); // scrolling down -> deflate
