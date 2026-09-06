@@ -26,6 +26,7 @@
 .cards .cards-card-body {
   margin: 0;
   padding: 28px 24px;
+  text-align: left;
 }
 
 /* Accent rule above each card heading */
@@ -53,6 +54,28 @@
   font-size: var(--body-font-size-s);
   color: var(--dark-color);
   line-height: 1.5;
+}
+
+/* Card links should read as plain links, not buttons — strip the button look */
+.cards .cards-card-body a,
+.cards .cards-card-body a.button:any-link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: normal;
+}
+
+.cards .cards-card-body a:hover,
+.cards .cards-card-body a:focus {
+  background: transparent;
+  text-decoration: underline;
 }
 
 .cards .cards-card-image {
