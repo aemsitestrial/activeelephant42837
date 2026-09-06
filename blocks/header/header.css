@@ -286,6 +286,7 @@ header nav .nav-tools {
     height: 90px;
     padding: 0 48px;
     gap: 0;
+    transition: height 0.28s ease;
   }
 
   header .nav-brand {
@@ -295,6 +296,7 @@ header nav .nav-tools {
     font-weight: 700;
     letter-spacing: -1px;
     line-height: 1;
+    transition: font-size 0.28s ease;
   }
 
   header .nav-brand p,
@@ -354,6 +356,7 @@ header nav .nav-tools {
     color: #767676;
     background: #f2f2f2;
     text-decoration: none;
+    transition: height 0.28s ease, min-width 0.28s ease;
   }
 
   header nav .nav-tools .nav-search:hover {
@@ -389,5 +392,19 @@ header nav .nav-tools {
     background: #333;
     transform: rotate(45deg);
     transform-origin: left center;
+  }
+
+  /* Deflated (shrunk) state — applied while scrolling down */
+  header .nav-wrapper.nav-shrink nav {
+    height: 62px;
+  }
+
+  header .nav-wrapper.nav-shrink .nav-brand {
+    font-size: 38px;
+  }
+
+  header .nav-wrapper.nav-shrink .nav-tools .nav-search {
+    height: 36px;
+    min-width: 180px;
   }
 }

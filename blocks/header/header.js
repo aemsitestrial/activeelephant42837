@@ -177,4 +177,29 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Shrink the header when scrolling down, restore it when scrolling up.
+  // Runs on rAF to avoid layout thrash on every scroll event.
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  const SHRINK_AFTER = 80; // px scrolled before shrinking kicks in
+  const updateHeaderState = () => {
+    const currentY = window.scrollY;
+    if (nav.getAttribute('aria-expanded') === 'true') {
+      // never shrink while the mobile menu is open
+      navWrapper.classList.remove('nav-shrink');
+    } else if (currentY > lastScrollY && currentY > SHRINK_AFTER) {
+      navWrapper.classList.add('nav-shrink'); // scrolling down -> deflate
+    } else if (currentY < lastScrollY) {
+      navWrapper.classList.remove('nav-shrink'); // scrolling up -> inflate
+    }
+    lastScrollY = currentY;
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeaderState);
+      ticking = true;
+    }
+  }, { passive: true });
 }
