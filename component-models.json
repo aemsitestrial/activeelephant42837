@@ -217,6 +217,35 @@
     ]
   },
   {
+    "id": "divider",
+    "fields": [
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Style",
+        "value": "line",
+        "options": [
+          {
+            "name": "Line",
+            "value": "line"
+          },
+          {
+            "name": "Dotted",
+            "value": "dotted"
+          },
+          {
+            "name": "Dots",
+            "value": "dots"
+          },
+          {
+            "name": "Spacer (no line)",
+            "value": "spacer"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {

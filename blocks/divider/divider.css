@@ -1,0 +1,63 @@
+.divider {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+/* Solid line */
+.divider.divider-line {
+  border-top: 1px solid #e0e0e0;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Dotted line */
+.divider.divider-dotted {
+  border-top: 2px dotted #cfcfcf;
+  padding: 0;
+}
+
+/* Three centered dots */
+.divider.divider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 12px;
+}
+
+.divider.divider-dots::before,
+.divider.divider-dots::after,
+.divider.divider-dots span {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-color, #ffe600);
+}
+
+.divider.divider-dots::before,
+.divider.divider-dots::after {
+  display: block;
+}
+
+/* Invisible spacer (just vertical rhythm) */
+.divider.divider-spacer {
+  border: 0;
+  height: 40px;
+  margin: 0 auto;
+}
+
+@media (width >= 900px) {
+  .divider {
+    padding: 0 32px;
+  }
+
+  .divider.divider-line,
+  .divider.divider-dotted {
+    padding: 0;
+  }
+}
