@@ -32,8 +32,24 @@ function normalizeImageLinks(root) {
   });
 }
 
+const LAYOUTS = ['side-by-side', 'overlay'];
+
 export default function decorate(block) {
   normalizeImageLinks(block);
+
+  // A trailing cell may hold the `layout` select value (e.g. "overlay").
+  // Detect it, apply the matching class, and remove it from the content.
+  const rows = [...block.children];
+  const lastRow = rows[rows.length - 1];
+  const lastText = lastRow && !lastRow.querySelector('picture')
+    ? lastRow.textContent.trim().toLowerCase()
+    : '';
+  if (LAYOUTS.includes(lastText)) {
+    block.classList.add(`teaser-${lastText}`);
+    lastRow.remove();
+  } else {
+    block.classList.add('teaser-side-by-side');
+  }
 
   const picture = block.querySelector('picture');
   const imageWrap = document.createElement('div');
