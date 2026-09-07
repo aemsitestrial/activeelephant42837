@@ -24,7 +24,10 @@
       "columns",
       "fragment",
       "announcement",
-      "grid"
+      "grid",
+      "carousel",
+      "teaser",
+      "divider"
     ]
   },
   {

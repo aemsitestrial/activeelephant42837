@@ -70,7 +70,8 @@
               "page": {
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
-                  "model": "section"
+                  "model": "section",
+                  "filter": "restricted-filter"
                 }
               }
             }
@@ -84,7 +85,8 @@
               "page": {
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
-                  "model": "section"
+                  "model": "section",
+                  "filter": "open-filter"
                 }
               }
             }
