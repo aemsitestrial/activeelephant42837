@@ -264,6 +264,13 @@ main .section.highlight {
   padding: 40px 0;
 }
 
+/* Section-level titles use an editorial serif (not card/block titles) */
+main .section > .default-content-wrapper h1,
+main .section > .default-content-wrapper h2,
+main .section > .default-content-wrapper h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
 /* Accent Title: short fixed-length yellow bar beneath the section's first heading */
 main .section.accent-title > div > h1:first-child,
 main .section.accent-title > div > h2:first-child,
