@@ -2,7 +2,8 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "open-section",
+      "restricted-section"
     ]
   },
   {
